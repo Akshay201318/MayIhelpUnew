@@ -14,7 +14,7 @@ const DATA = [
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    iconUrl: require("../public/images/Fashion.png"),
+    iconUrl: require("../public/images/Artboard.png"),
     title: "Fashion"
   },
   {
@@ -24,12 +24,12 @@ const DATA = [
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d73",
-    iconUrl: require("../public/images/Appliances.png"),
+    iconUrl: require("../public/images/Appliences.png"),
     title: "Appliences"
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d74",
-    iconUrl: require("../public/images/Electronic.png"),
+    iconUrl: require("../public/images/Electronics.png"),
     title: "Electronics"
   },
   {
@@ -40,8 +40,8 @@ const DATA = [
 ];
 
 const Item = ({ item, onPress, style }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
-    <Image style={{height: 50, width: 50, borderRadius: 100}} resizeMode="cover" source ={item.iconUrl}/>
+  <TouchableOpacity onPress={onPress} style={styles.item}>
+    <Image style={{width:50, height:50, borderRadius: 100}}  source ={item.iconUrl}/>
   </TouchableOpacity>
 );
 
@@ -54,8 +54,7 @@ const FlatListHorizontal = ({ onPress } ) => {
         <View>
       <Item
         item={item}
-        onPress={() => item.title == "All" ? onPress : null }
-        style={{ backgroundColor }}
+        onPress={() => item.id == "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba" ? onPress() : null }
       />
       <Text style ={{textAlign: "center", fontSize: 10,}}>{item.title}</Text>
       </View>
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 100,
     alignItems:"center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   title: {
     fontSize: 15,

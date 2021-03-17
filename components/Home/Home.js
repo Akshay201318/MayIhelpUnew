@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet, Animated, Dimensions } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,10 @@ import SwiperFlatListComponent from "../../customComponents/swiper-flatlist";
 import FlatListHorizontal from "../../customComponents/flatListHorizontal";
 import DrawerWindow from "../../customComponents/HomeOptionsDrawerWindow";
 import AllCategoriesDrawerWindow from "../../customComponents/AllCategoriseDrawerWindow";
+import List from "../../customComponents/List";
+import List2 from "../../customComponents/List2";
+import { loadLocation } from "../user/userMethods";
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const Home = ({ user, navigation }) => {
@@ -17,6 +21,8 @@ const Home = ({ user, navigation }) => {
     const [animatedAllCategoriesValue, setAnimatedAllCategoriesValue] = useState(new Animated.Value(-Dimensions.get('window').width/2))
     const [AllCategoriesDrawerWidth, setAllCategoriesDrawerWidth] = useState(0)
     const userData = useSelector(store => store.UserData);
+    const [ location , setLocation ] = useState({});
+    const [locattionErr, setErrorMsg] = useState('');
 
     const toggleHomeOptionsDrawer = () => {
         slideHomeOptionsAnimation()
@@ -45,6 +51,10 @@ const Home = ({ user, navigation }) => {
             setAllCategoriesDrawerWidth(AllCategoriesDrawerWidth===1?0:1)
         })
     }
+
+    useEffect(()=>{
+        loadLocation(setLocation, setErrorMsg);
+    },[userData.user])
 
     return (
         <View style={{ flex: 1, position: "absolute", height: "100%" }}>
@@ -95,8 +105,8 @@ const Home = ({ user, navigation }) => {
                     />
                     <Text style={{ fontSize: 15, color: "white", paddingLeft: 5 }}>Update Location</Text>
                 </View>
-                <View>
-                    <Text style={{ fontSize: 20, color: "white", fontWeight: "800" }}> Kasan, Haryana</Text>
+                <View style={{width: 200}}>
+                    <Text style={{ fontSize: 15, color: "white", fontWeight: "800" }}>{location && location.length && location[0].formatted_address}</Text>
                 </View>
             </View>
             <View>
@@ -105,11 +115,27 @@ const Home = ({ user, navigation }) => {
             </View> 
                 <FlatListHorizontal onPress ={toggleAllCategoriesDrawer} navigation={navigation}/>
             </View>
-            <View style={{ height: "30%", width: "100%" }}>
+            <ScrollView style={{flex:1, height:"100%"}}>
+            <View style={{flex: 1}}>
+            <View style={{ height: "15%", width: "100%" }}>
                 <SwiperFlatListComponent />
             </View>
-            <View></View>
-            <View></View>
+            <View>
+                <List data={{ 
+                    listHeader: "Recommendations for you",
+                    nevigation: navigation,
+                    uri:"getRecommendedItems"
+                    }}/>
+            </View>
+            <View>
+                <List2 data={{ 
+                    listHeader: "Shops near you",
+                    nevigation: navigation,
+                    uri:"getRecommendedItems"
+                    }}/>
+            </View>
+            </View>
+            </ScrollView>
         </View>
     )
 }

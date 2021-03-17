@@ -27,7 +27,8 @@ const AllCategories = ({ style, animatedValue, navigation, onPress }) => {
                     />
                 </TouchableOpacity>
             </View>
-            <View style={{ backgroundColor: "#FFF", height: "60%" }}>
+            <View style ={{backgroundColor:"white",}}>
+            <View style={{  height: "60%", }}>
             <View style={{borderBottomWidth: 2, borderBottomColor: "#E5E5E5", paddingBottom:20}}>
                 <View style={{flexDirection:"row", alignItems:"center", paddingHorizontal:15, paddingTop:10 }}>
                     <Image
@@ -143,6 +144,7 @@ const AllCategories = ({ style, animatedValue, navigation, onPress }) => {
                     </TouchableOpacity>
                 </View>
             </View>
+            </View>
         </Animated.View>
     )
 }
@@ -155,15 +157,14 @@ const styles = StyleSheet.create({
         zIndex: 5,
         borderStyle: "solid",
         borderRightWidth: 1,
-        borderRightColor: "#17ffc6"
+        borderRightColor: "#0CCDA3",
     },
     headerContainer: {
         backgroundColor: "#0CCDA3",
-        height: 100,
-        flexDirection: "row"
-    },
-    header: {
-
+        height: 60,
+        flexDirection: "row",
+        justifyContent:"space-between",
+        paddingHorizontal: 10
     },
     logoutButton: {
         width: "40%",
