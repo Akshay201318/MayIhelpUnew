@@ -17,9 +17,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 const Home = ({ user, navigation }) => {
 
     const [animatedHomeOptionsValue, setAnimatedValue] = useState(new Animated.Value(-Dimensions.get('window').width/2));
-    const [HomeOptionsDrawerWidth, setHomeOptionsDrawerWidth] = useState(0);
+    const [HomeOptionsDrawerWidth, setHomeOptionsDrawerWidth] = useState(1);
     const [animatedAllCategoriesValue, setAnimatedAllCategoriesValue] = useState(new Animated.Value(-Dimensions.get('window').width/2))
-    const [AllCategoriesDrawerWidth, setAllCategoriesDrawerWidth] = useState(0)
+    const [AllCategoriesDrawerWidth, setAllCategoriesDrawerWidth] = useState(1)
     const userData = useSelector(store => store.UserData);
     const [ location , setLocation ] = useState({});
     const [locattionErr, setErrorMsg] = useState('');
@@ -53,11 +53,11 @@ const Home = ({ user, navigation }) => {
     }
 
     useEffect(()=>{
-        loadLocation(setLocation, setErrorMsg);
+        // loadLocation(setLocation, setErrorMsg);
     },[userData.user])
 
     return (
-        <View style={{ flex: 1, position: "absolute", height: "100%" }}>
+        <View style={{ flex: 1, position: "absolute", height: "100%", backgroundColor:"white" }}>
                 <View style={{ flex: 1, position: "absolute", width: "100%", height: "100%" }}>
                     <DrawerWindow  onPress={toggleHomeOptionsDrawer} animatedValue={animatedHomeOptionsValue} navigation={navigation} />
                 </View> 
@@ -110,7 +110,7 @@ const Home = ({ user, navigation }) => {
                 </View>
             </View>
             <View>
-            <View style={{ flex: 1, position: "absolute", width: "100%", height: "100%" }}>
+            <View style={{ position: "absolute", width: "100%", height: "100%", }}>
                     <AllCategoriesDrawerWindow  onPress={toggleAllCategoriesDrawer} animatedValue={animatedAllCategoriesValue} navigation={navigation} />
             </View> 
                 <FlatListHorizontal onPress ={toggleAllCategoriesDrawer} navigation={navigation}/>
@@ -136,6 +136,33 @@ const Home = ({ user, navigation }) => {
             </View>
             </View>
             </ScrollView>
+            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-around"}}>
+                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
+                 <Image
+                        source={require('../../public/images/drawable-xxxhdpi/ic_home_24px.png')}
+                    />
+                 </TouchableOpacity>
+                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
+                 <Image
+                        source={require('../../public/images/drawable-xxxhdpi/ic_store_24px.png')}
+                    />
+                 </TouchableOpacity>
+                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
+                 <Image
+                        source={require('../../public/images/drawable-xxxhdpi/ic_people_24px.png')}
+                    />
+                 </TouchableOpacity>
+                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
+                 <Image
+                        source={require('../../public/images/drawable-xxxhdpi/ic_shopping_cart_24px.png')}
+                    />
+                 </TouchableOpacity>
+                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
+                 <Image
+                        source={require('../../public/images/drawable-xxxhdpi/ic_notifications_24px.png')}
+                    />
+                 </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -153,4 +180,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
+    bottomNavigationIconStyle:{
+         height: 50, 
+         width: 50, 
+         borderRadius: 50, 
+         alignItems:"center", 
+         flexDirection:"row"
+        }
 });
