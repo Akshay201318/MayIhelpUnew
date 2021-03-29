@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Animated, Dimensions } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { removeToken } from '../components/user/userMethods';
 
 const DrawerWindow = ({ style, animatedValue, navigation, onPress }) => {
     const userData = useSelector(store => store.UserData.user);
+    const dispatch = useDispatch();
     const tranlateValue = {
         translateX: animatedValue.interpolate({
             inputRange: [0, 1],
@@ -141,7 +142,7 @@ const DrawerWindow = ({ style, animatedValue, navigation, onPress }) => {
                 <View>
                     <TouchableOpacity
                         style={styles.logoutButton}
-                        onPress={() => removeToken(navigation)}
+                        onPress={() => removeToken(navigation, dispatch)}
                     >
                         <Text style={{ color: '#ffffff', fontSize: 20 }}>
                             Log Out</Text>

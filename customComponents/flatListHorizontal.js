@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, Image, TouchableOpacity, View } from "react-native";
+import { 
+  MobilesImg,
+  AppliencesImg,
+  KitchenImg,
+  ElectronicsImg
+ } from "../Images";
 
 const DATA = [
   {
@@ -19,22 +25,22 @@ const DATA = [
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d71",
-    iconUrl: require("../public/images/Mobile.png"),
+    iconUrl: MobilesImg,
     title: "Mobiles"
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d73",
-    iconUrl: require("../public/images/Appliences.png"),
+    iconUrl: AppliencesImg,
     title: "Appliences"
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d74",
-    iconUrl: require("../public/images/Electronics.png"),
+    iconUrl: ElectronicsImg,
     title: "Electronics"
   },
   {
     id: "58694a0f-3da1-471f-bd96-145571e29d75",
-    iconUrl: require("../public/images/Kitchen.png"),
+    iconUrl: KitchenImg,
     title: "Kitchen"
   }
 ];

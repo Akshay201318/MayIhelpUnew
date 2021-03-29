@@ -23,6 +23,7 @@ const MainApp = () => {
   const [user, setUser] = useState({});
   
   const [token, setToken] = useState('');
+
   useEffect(() => {
     getToken(setToken);
     if (token) {
@@ -35,7 +36,7 @@ const MainApp = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
           name="SignIn"
-          component={token && token.length ? Home : SignIn}
+          component={userData && userData.user.name ? Home : SignIn}
         />
         <Stack.Screen
           name="SignUp"
@@ -43,7 +44,7 @@ const MainApp = () => {
         />
         <Stack.Screen
           name="Home"
-          component={ Home }
+          component={ userData && userData.name ? Home: SignIn }
         />
         <Stack.Screen
           name="ForgotPassword"

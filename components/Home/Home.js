@@ -10,6 +10,7 @@ import DrawerWindow from "../../customComponents/HomeOptionsDrawerWindow";
 import AllCategoriesDrawerWindow from "../../customComponents/AllCategoriseDrawerWindow";
 import List from "../../customComponents/List";
 import List2 from "../../customComponents/List2";
+import Footer from "../../customComponents/Footer";
 import { loadLocation } from "../user/userMethods";
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -53,10 +54,11 @@ const Home = ({ user, navigation }) => {
     }
 
     useEffect(()=>{
-        // loadLocation(setLocation, setErrorMsg);
-    },[userData.user])
+        loadLocation(setLocation, setErrorMsg);
+    },[userData])
 
     return (
+        userData.isLoading ? <ActivityIndicator size="large" color="#00ff00" /> :
         <View style={{ flex: 1, position: "absolute", height: "100%", backgroundColor:"white" }}>
                 <View style={{ flex: 1, position: "absolute", width: "100%", height: "100%" }}>
                     <DrawerWindow  onPress={toggleHomeOptionsDrawer} animatedValue={animatedHomeOptionsValue} navigation={navigation} />
@@ -136,33 +138,7 @@ const Home = ({ user, navigation }) => {
             </View>
             </View>
             </ScrollView>
-            <View style={{flexDirection:"row", alignItems:"center", justifyContent:"space-around"}}>
-                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
-                 <Image
-                        source={require('../../public/images/drawable-xxxhdpi/ic_home_24px.png')}
-                    />
-                 </TouchableOpacity>
-                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
-                 <Image
-                        source={require('../../public/images/drawable-xxxhdpi/ic_store_24px.png')}
-                    />
-                 </TouchableOpacity>
-                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
-                 <Image
-                        source={require('../../public/images/drawable-xxxhdpi/ic_people_24px.png')}
-                    />
-                 </TouchableOpacity>
-                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
-                 <Image
-                        source={require('../../public/images/drawable-xxxhdpi/ic_shopping_cart_24px.png')}
-                    />
-                 </TouchableOpacity>
-                 <TouchableOpacity style={styles.bottomNavigationIconStyle}>
-                 <Image
-                        source={require('../../public/images/drawable-xxxhdpi/ic_notifications_24px.png')}
-                    />
-                 </TouchableOpacity>
-            </View>
+            <Footer/>
         </View>
     )
 }

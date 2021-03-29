@@ -1,4 +1,4 @@
-import { INIT, GET_USER_DATA, FAILED, LOGIN, SIGNUP } from '../../index';
+import { INIT, GET_USER_DATA, FAILED, LOGIN, SIGNUP, REMOVE_USER_DATA } from '../../index';
 
 const initalState = {
     user: {},
@@ -22,6 +22,14 @@ const UserReducer = (state = initalState, { type, payload }) => {
                 isLoading: false,
                 isError: false,
                 user:payload,
+            });
+        }
+        case REMOVE_USER_DATA: {
+            return Object.assign({
+                ...state,
+                isLoading: false,
+                isError: false,
+                user:{},
             });
         }
         case LOGIN: {

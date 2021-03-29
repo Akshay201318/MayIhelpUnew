@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 import { showMessage, hideMessage } from "react-native-flash-message";
-import { AddUser } from '../../redux/action/userActions/index';
+import { AddUser, RemoveUser } from '../../redux/action/userActions/index';
 import GetLocation from 'react-native-get-location'
 
 let baseUrl = 'https://mayihelpu.herokuapp.com/api';
-baseUrl = 'http://192.168.43.207:8000/api';
+// baseUrl = 'http://192.168.43.207:8000/api';
 
 
 const storeToken = async (token) => {
@@ -29,12 +29,19 @@ const getToken = async (setToken) => {
     }
 }
 
-const removeToken = async (navigation) => {
+const removeToken = async ({navigation, dispatch}) => {
     try {
         await AsyncStorage.removeItem(
             'MayIHelpU',
-        )
-        navigation.navigate('SignIn')
+        ).then(function () {
+            dispatch(RemoveUser());
+        })
+        .catch(function (error) {
+            showMessage({
+                message: "Something went wrong",
+                type: "danger",
+            });
+        });
     } catch (error) {
         console.log("error in deleting the token");
     }
@@ -130,7 +137,6 @@ const getUserData = (token, dispatch) => {
 }
 
 const loadLocation = async (setLocation, setErrorMsg) => {
-
     setLocation(null);
     setErrorMsg(null);
 
@@ -143,7 +149,6 @@ const loadLocation = async (setLocation, setErrorMsg) => {
             .then(location => {
                 console.log(location);
                 const { latitude, longitude } = location;
-                let percentSign = '%';
                 const ApiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBFmg_pT9dAW5bwMGch5bLmSA0S2KJFnDE`;
 
                 fetch(ApiUrl).then(response => {
